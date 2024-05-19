@@ -1,0 +1,97 @@
+---
+#该配置文件处理的是图像数据集
+type: image
+#学习率
+lr: 0.1
+#动量
+momentum: 0.9
+#衰减系数
+decay: 0.0005
+#每个客户端迭代的次数
+epochs: 1010
+
+#实验的环境名
+environment_name: exp01
+#采用迪利克雷划分数据集
+sampling_dirichlet: true
+dirichlet_alpha: 0.9
+batch_size: 64
+test_batch_size: 1000
+eta: 1
+#联邦学习中总参与方的数量
+number_of_total_participants: 100
+poison_images:
+  - 30696
+  - 33105
+  - 33615
+  - 33907
+  - 36848
+  - 40713
+  - 41706
+#手动选择的测试图像
+poison_images_test:
+  - 330
+  - 568
+  - 3934
+  - 12336
+  - 30560
+size_of_secret_dataset: 200
+#恢复模型
+resumed_model:
+
+
+#中毒图像名
+poison_type: wall
+#注入后门的过程是否进行了随机化处理
+random_compromise: false
+#是否使用了基线模型
+baseline: false
+no_models: 10
+#判断是否中毒
+is_poison: true
+#在第几个epochs使用中毒
+poison_epochs: [0,10,20,30,1000]
+#后门攻击恶意参与者的数量
+number_of_adversaries: 2
+#模型保存
+save_model: false
+save_on_epochs: [10, 100, 500, 1000, 2000, 5000]
+poison_lr: 0.05
+# 在训练过程中多少次迭代进行一次后门重训练攻击
+retrain_poison: 15
+#是否使用阶梯式学习率调整策略
+poison_step_lr: true
+#每批次中被注入后门的图像数量
+poisoning_per_batch: 1
+#指定了注入后门时添加的噪声水平
+noise_level: 0.01
+#被注入后门的图像的标签交换值
+poison_label_swap: 2
+#是否报告中毒损失
+report_poison_loss: false
+#是否使用差分隐私技术
+diff_privacy: false
+#指定了用于计算梯度更新的梯度的标准化值,防止梯度爆炸,进行梯度裁剪会用到
+s_norm: 1000000
+#后门注入过程中调整模型权重的比例因子
+scale_weights: 100
+#是否跟踪模型之间的距离，通常用于评估模型之间的相似性或变化程度。
+track_distance: false
+#是否加载虚假参与者数据
+fake_participants_load: false
+#是否报告训练损失
+report_train_loss:
+#是否保存虚假参与者数据
+fake_participants_save: false
+#虚假参与者数据的文件路径
+fake_participants_file: data/reddit/updates_cifar.pt.tar
+#是否将实验结果输出为JSON格式
+results_json: false
+#  是否报告测试损失
+report_test_loss: false
+#在后门攻击中,为了防止模型参数更新到不合理的数值,该参数设置了参数更新的最大值,1.0表示参数更新将被限制在正负1范围内
+clamp_value: 1.0
+#指定了在后门训练中,对于后门目标的损失函数中的权重因子,1.0表示后门损失与主要训练损失具有相同的权重,表明攻击者将后门任务视为和主任务同等重要的优化目标
+alpha_loss: 1.0
+#重新训练的次数
+retrain_no_times: 2
